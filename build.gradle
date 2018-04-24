@@ -1,0 +1,68 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+apply plugin: 'java'
+
+import javax.tools.ToolProvider
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/']
+        }
+        resources {
+            srcDirs = ['res/']
+        }
+    }
+}
+
+repositories {
+    maven { url '../../tools/common/m2/repository' }
+}
+
+dependencies {
+    // tools.jar required for com.sun.javadoc
+    compile files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs())
+    compile project(path: ':antlr', configuration: 'antlrRuntime')
+    compile project(':jsilver')
+    compile project(':tagsoup')
+}
+
+shadowJar {
+  exclude 'com/sun/**'
+  exclude 'javax/**'
+  exclude 'sun/**'
+  exclude 'com/google/common/**'
+  exclude 'jdk/**'
+  exclude 'netscape/**'
+  exclude 'javafx/**'
+  exclude 'com/apple/**'
+  exclude 'apple/**'
+}
+
+/*
+
+if (project.hasProperty("usePrebuilts") && project.usePrebuilts == "true") {
+    repositories {
+        maven { url '../../prebuilts/tools/common/m2/repository' }
+    }
+
+    dependencies {
+        compile 'org.antlr:antlr:3.5.2'
+        compile 'com.google.jsilver:jsilver:1.0.0'
+        compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+        // required by jsilver
+        compile 'com.google.guava:guava:15.0'
+    }
+} else {
+
+    dependencies {
+        compile project(path: ':antlr', configuration: 'antlrRuntime')
+        compile project(':jsilver')
+        compile project(':tagsoup')
+    }
+}
+*/

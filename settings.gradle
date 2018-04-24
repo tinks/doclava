@@ -1,0 +1,2 @@
+rootProject.name='doclava'
+include 'antlr', 'tagsoup', 'jsilver', 'guava', 'jsr305'

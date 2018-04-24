@@ -1,0 +1,18 @@
+#header {
+  border-bottom: 3px solid #4C4F54;
+  background: #4C4F54;
+}
+
+#search_filtered .jd-selected {
+  background-color:#0094bd;
+}
+
+#search-button {
+  background: transparent url(http://help.ooyala.com/sites/all/themes/ooyalasupport/public/images/search.svg) no-repeat center;
+  background-size: contain;
+  color: transparent;
+  height: 18px;
+  opacity: 1;
+  width: 18px;
+  border: 0;
+}
